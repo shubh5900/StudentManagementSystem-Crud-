@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div>
+    <h1 class="title">Registration form</h1>
+    
+    <h1 class="title" style="background-color: green;">Update form</h1>
+    
+    
+    <h1 class="title" style="background-color: red;">Delete Information</h1>
+
+    </div>
+    <div class="regi">
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="name">
+                <p class=" form" >Name:</p>
+                <input type="text" name="name" placeholder="First Name" id="" class="input" value="{{dataget.name}}" required>
+            </div>
+            <div class="name">
+                <p class="form" >Email:</p>
+                <input type="text" name="email" placeholder="First Name" id="" class="input" value="{{dataget.email}}" required>
+            </div>    
+            <div class="name">
+                <p class=" form" >Roll Number:</p>
+                <input type="text" name="roll" placeholder="First Name" id="" class="input" value="{{dataget.roll_number}}" required>
+            </div>   
+            <div class="name">   
+                <p class=" form"   >Section:</p>
+                <input type="text" name="section" placeholder="First Name" id="" class="input" value="{{dataget.section}}" required>
+            </div> 
+            <div class="bt">   
+                <button type="submit">submit</button>
+            </div>     
+        </form>
+    </div>  
+    <br>
+    <table class="out" >
+        <th >
+            <td>Student Name</td>
+            <td>Email</td>
+            <td>Roll Numder</td>
+            <td>Section</td>
+            <td >Action</td>
+        </th>
+        
+        {% for i in data %}
+        <tr><td></td>
+            <td>{{i.name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.roll_number}}</td>
+            <td>{{i.section}}</td>
+            <td style=" text-align: left;"><a href="{% url 'update' i.id %}" ><button class="btu">Update</button></a>
+            <a href="{% url 'delete' i.id %}" ><button class="btb">Delete</button></a></td>
+        </tr>
+        {% endfor %}  
+    </table>
+    
+        
+  
+</body>
+</html>
